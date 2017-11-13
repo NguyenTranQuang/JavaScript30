@@ -31,29 +31,106 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const question1 = inventors.filter(function(inventor) {
+      if (inventor.year >= 1500 && inventor.year < 1600) {
+        return true;   //.filter() only return true element, so don't need else in this case;
+      }
+    });
+
+    const question1_1 = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600)) //still work with shorter syntax
+    console.table(question1_1);
+    console.table(question1);
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const question2 = inventors.map(inventor => (inventor.first + " " +  inventor.last));
+    const question2_2 = inventors.map(inventor => `${inventor.first} ${inventor.last}`); //it 's the same'
+    console.log(question2 );
+    console.log(question2_2);
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const question3 = inventors.sort(function(a,b) {
+      if(a.year > b.year) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    })
+
+    const question3_3 = inventors.sort((a,b) => a.year > b.year ? 1 : -1); //it is the same but shorter much !
+    console.table(question3);
+    console.table(question3_3);
+
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    var totalYears = 0;
+    for(var i = 0; i < inventors.length; i++) {
+      totalYears += (inventors[i].passed - inventors[i].year);
+    }
+    console.log(totalYears);
+
+    const totalYears1 = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year );
+    },0);
+    console.log(totalYears1);
 
     // 5. Sort the inventors by years lived
+    const question5 = inventors.sort(function(a,b) {
+      const firstOne = a.passed - a.year;
+      const secondeOne = b.passed - b.year;
+      if(firstOne > secondeOne) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    });
+
+    const question5_5 = inventors.sort(function(a,b) {
+      const firstOne = a.passed - a.year;
+      const secondeOne = b.passed - b.year;
+      return firstOne > secondeOne ? 1 : -1; // Don't need if statement
+    });
+    console.table(question5);
+    console.table(question5_5);
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const category = document.querySelector('.mw-category');
+    // const links = Array.from(category.querySelectorAll('a'));
+    // const de = links
+    //                 .map(link => link.textContent)
+    //                 .filter(streetName => streetName.includes('de'));
+
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const alpha = people.sort((lastOne, nextOne) => {
+      const[aLast, aFirst] = lastOne.split(', ');
+      const[bLast, bFirst] = nextOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    console.log(alpha);
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const transportation = data.reduce(function(obj, item) {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+    console.log(transportation);
   </script>
 </body>
 </html>
