@@ -7,6 +7,18 @@
 </head>
 <body>
 <script>
+const pressed = [];
+const scretCode = 'quang';
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+  pressed.push(e.key);
+  pressed.splice(-scretCode.length - 1, pressed.length - scretCode.length);
+  if (pressed.join('').includes(scretCode)) {
+    console.log("Great Job !!!");
+    cornify_add();
+  }
+  console.log(pressed);
+});
 </script>
 </body>
 </html>
